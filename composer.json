@@ -2,9 +2,11 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.4",
         "ext-ctype": "*",
+        "ext-dom": "*",
         "ext-iconv": "*",
+        "lywzx/php-epub": "^0.1.2",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "5.1.*",
         "symfony/console": "5.1.*",

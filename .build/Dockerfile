@@ -32,6 +32,9 @@ RUN chown www-data:www-data /var/www && \
 
 COPY .build/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
+RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
+    echo ${TIMEZONE} > /etc/timezone
+
 WORKDIR /var/www
 
 EXPOSE 9000

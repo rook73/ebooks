@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Авторы без книг{% endblock %}
+
+{% block body %}
+    <h1>Авторы без книг</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Автор</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for author in authors %}
+            <tr>
+                <td>{{ author.name }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('book_index') }}">Список</a>
+{% endblock %}

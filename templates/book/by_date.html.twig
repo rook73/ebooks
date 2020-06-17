@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Книги по дате загрузки{% endblock %}
+
+{% block body %}
+    <h1>Книги по дате загрузки</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Количество</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for date in dates %}
+            <tr>
+                <td>{{ date.date|date('Y-m-d') }}</td>
+                <td>{{ date.count }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('book_index') }}">Список</a>
+{% endblock %}

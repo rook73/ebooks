@@ -38,11 +38,13 @@ services:
             target: develop
             args:
                 TIMEZONE: ${TIMEZONE}
-                XDEBUG_CONFIG: "idekey=${DOCKER_XDEBUG_IDEKEY}"
-                PHP_IDE_CONFIG: "serverName=_"
-                XDEBUG_REMOTE_HOST: ${DOCKER_XDEBUG_REMOTE_HOST}
-                XDEBUG_REMOTE_PORT: ${DOCKER_XDEBUG_REMOTE_PORT}
-                XDEBUG_IDEKEY: ${DOCKER_XDEBUG_IDEKEY}
+        environment:
+            TIMEZONE: ${TIMEZONE}
+            XDEBUG_CONFIG: "idekey=${DOCKER_XDEBUG_IDEKEY}"
+            PHP_IDE_CONFIG: "serverName=_"
+            XDEBUG_REMOTE_HOST: ${DOCKER_XDEBUG_REMOTE_HOST}
+            XDEBUG_REMOTE_PORT: ${DOCKER_XDEBUG_REMOTE_PORT}
+            XDEBUG_IDEKEY: ${DOCKER_XDEBUG_IDEKEY}
         networks:
             - main
         depends_on:

@@ -25,3 +25,13 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\EventSubscriber\DateTimeSubscriber:
+        tags:
+            - { name: 'doctrine.event_subscriber', connection: 'default'}
+
+    App\Service\BookFormat\FictionBook:
+        tags: ['app.book_format']
+
+    App\Service\BookFormat\ElectronicPublication:
+        tags: ['app.book_format']
