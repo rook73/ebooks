@@ -2,36 +2,32 @@
 
 namespace App\Form;
 
-use App\Entity\Author;
-use App\Entity\Book;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BookType extends AbstractType
+class BookSearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->setMethod('GET')
             ->add(
-                'author',
-                EntityType::class,
+                'q',
+                SearchType::class,
                 [
-                    'class' => Author::class,
-                    'choice_label' => 'name',
+                    'label' => false,
                     'required' => false,
                 ]
-            )
-            ->add('title')
-            ->add('lang');
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             [
-                'data_class' => Book::class,
+                'csrf_protection' => false,
             ]
         );
     }

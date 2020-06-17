@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Form\BookSearchType;
 use App\Form\BookType;
 use App\Form\BookUploadType;
 use App\Repository\AuthorRepository;
@@ -29,14 +30,20 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/", name="book_index", methods={"GET"})
+     * @Route("/", name="book_index", methods={"GET","POST"})
      */
-    public function index(BookRepository $bookRepository): Response
+    public function index(Request $request, BookRepository $bookRepository): Response
     {
+        $form = $this->createForm(BookSearchType::class);
+        $form->handleRequest($request);
+
+        $string = $form->getData()['q'] ?? null;
+
         return $this->render(
             'book/index.html.twig',
             [
-                'books' => $bookRepository->findAll(),
+                'books' => $bookRepository->search($string, 100),
+                'form' => $form->createView(),
             ]
         );
     }
@@ -56,7 +63,6 @@ class BookController extends AbstractController
             $book = $bookParser->parseFile($file);
 
             if (null !== $book) {
-
                 $this->em->persist($book->getAuthor());
                 $this->em->persist($book);
                 $this->em->flush();

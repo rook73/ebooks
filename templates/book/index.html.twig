@@ -1,19 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book index{% endblock %}
+{% block title %}Список книг{% endblock %}
 
 {% block body %}
-    <h1>Book index</h1>
+    <h1>Список книг</h1>
+
+
+    <div class="card">
+        <div class="card-header">
+            Поиск
+        </div>
+        <div class="card-body">
+            {{ include('book/_form.html.twig', {'button_label': 'Поиск'}) }}
+        </div>
+    </div>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Author</th>
-                <th>Title</th>
-                <th>Lang</th>
-                <th>CreatedAt</th>
-                <th>actions</th>
+                <th>Автор</th>
+                <th>Название</th>
+                <th>Язык</th>
+                <th>Добавленно</th>
+                <th>Действия</th>
             </tr>
         </thead>
         <tbody>
@@ -25,8 +35,8 @@
                 <td>{{ book.lang }}</td>
                 <td>{{ book.createdAt ? book.createdAt|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('book_show', {'id': book.id}) }}">show</a>
-                    <a href="{{ path('book_edit', {'id': book.id}) }}">edit</a>
+                    <a href="{{ path('book_show', {'id': book.id}) }}">показать</a>
+                    <a href="{{ path('book_edit', {'id': book.id}) }}">редактировать</a>
                 </td>
             </tr>
         {% else %}
@@ -37,9 +47,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('book_new') }}">Create new</a>
-    <a href="{{ path('book_upload') }}">Загрузить</a>
-    <a href="{{ path('book_count') }}">Количество книг</a>
-    <a href="{{ path('authors_without_books') }}">Авторы без книг</a>
-    <a href="{{ path('books_by_date') }}">Количество книг по датам</a>
+    <a class="btn btn-secondary" href="{{ path('book_new') }}">Создать</a>
+    <a class="btn btn-secondary" href="{{ path('book_upload') }}">Загрузить</a>
+    <a class="btn btn-secondary" href="{{ path('book_count') }}">Количество книг</a>
+    <a class="btn btn-secondary" href="{{ path('authors_without_books') }}">Авторы без книг</a>
+    <a class="btn btn-secondary" href="{{ path('books_by_date') }}">Количество книг по датам</a>
 {% endblock %}

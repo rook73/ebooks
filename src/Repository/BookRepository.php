@@ -19,6 +19,23 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function search(?string $search, ?int $limit = null)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        if ($search) {
+            $qb
+                ->andWhere('a.title LIKE :search')
+                ->setParameter(':search', '%' . $search . '%');
+        }
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function booksByDates()
     {
         return $this->createQueryBuilder('a')
